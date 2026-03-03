@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Rishav Raj",
+    "phone": "9142282991",
+    "email": "abc@gmail.com",
+    "password": "11223344",
+    "role": "User"
+  },
+  {
+    "name": "Gaurav kumar",
+    "phone": "9931023578",
+    "email": "gaurav@gmail.com",
+    "password": "11223344",
+    "role": "Admin"
+  }
+]
