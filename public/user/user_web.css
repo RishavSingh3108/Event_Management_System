@@ -1,0 +1,136 @@
+:root {
+    --bg: #fff5f5;
+    --card-bg: #ffffff;
+    --accent: #d4a373; /* Champagne Gold */
+    --text: #4a3737;
+    --text-dim: #8d7777;
+    --glass: rgba(212, 163, 115, 0.1);
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Background Decoration */
+.hero-blur {
+    position: fixed;
+    top: -10%; left: -10%;
+    width: 50%; height: 50%;
+    background: radial-gradient(circle, rgba(0, 255, 170, 0.1) 0%, transparent 70%);
+    z-index: -1;
+    filter: blur(80px);
+}
+
+/* Navigation */
+.premium-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 5%;
+}
+
+.logo { font-size: 2rem; font-weight: 700; letter-spacing: -2px; }
+.logo span { color: var(--accent); }
+
+.nav-right { display: flex; align-items: center; gap: 3rem; }
+.nav-link { color: var(--text-dim); text-decoration: none; transition: 0.3s; }
+.nav-link:hover { color: var(--accent); }
+
+.profile-chip {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--glass);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.icon-logout { background: transparent; border: none; color: #ff4d4d; cursor: pointer; font-size: 1.2rem; }
+
+/* Search Header */
+.app-shell { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+.hero-text { margin: 4rem 0; }
+.hero-text h1 { font-size: 4rem; margin: 0; }
+.hero-text span { display: block; color: var(--accent); font-weight: 300; font-style: italic; }
+
+.search-glass {
+    margin-top: 2rem;
+    display: flex;
+    background: var(--glass);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 0.5rem;
+    border-radius: 15px;
+    max-width: 600px;
+    backdrop-filter: blur(10px);
+}
+
+.search-glass input {
+    background: transparent; border: none; outline: none;
+    color: white; padding: 1rem; width: 100%; font-size: 1.1rem;
+}
+
+.search-trigger {
+    background: var(--accent); border: none;
+    width: 50px; border-radius: 12px; cursor: pointer;
+    font-size: 1.5rem; display: flex; align-items: center; justify-content: center;
+}
+
+/* Venue Strip (Full Width) */
+.venue-strip {
+    background: var(--card-bg);
+    border-radius: 30px;
+    display: flex;
+    height: 350px;
+    margin-bottom: 3rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    overflow: hidden;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.venue-strip:hover { transform: scale(1.02); border-color: var(--accent); }
+
+.strip-img { width: 45%; position: relative; }
+.strip-img img { width: 100%; height: 100%; object-fit: cover; }
+.rating-pill {
+    position: absolute; top: 20px; left: 20px;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+    padding: 0.4rem 0.8rem; border-radius: 50px; font-weight: 700;
+}
+
+.strip-content { width: 55%; padding: 3rem; display: flex; flex-direction: column; justify-content: space-between; }
+
+.category { color: var(--accent); font-size: 0.8rem; letter-spacing: 3px; font-weight: 700; }
+.strip-content h2 { font-size: 2.2rem; margin: 0.5rem 0; }
+.loc-text { color: var(--text-dim); }
+
+.strip-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 2rem;
+}
+
+.pricing .label { display: block; color: var(--text-dim); font-size: 0.8rem; }
+.pricing .amount { font-size: 1.8rem; font-weight: 700; }
+.pricing .amount span { font-size: 0.9rem; font-weight: 300; color: var(--text-dim); }
+
+.btn-ghost { 
+    background: rgba(16, 226, 188, 0.2); color: var(--accent); border: 2px solid rgba(16, 226, 188, 0.2);
+    padding: 0.8rem 2rem; border-radius: 12px; cursor: pointer; margin-right: 1rem; font-weight: 700;
+}
+
+.btn-solid { 
+    background: var(--accent); color: var(--bg); border: none;
+    padding: 0.8rem 2rem; border-radius: 12px; cursor: pointer; font-weight: 700;
+}
+
+@media (max-width: 900px) {
+    .venue-strip { flex-direction: column; height: auto; }
+    .strip-img, .strip-content { width: 100%; }
+}

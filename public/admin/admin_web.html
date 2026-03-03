@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | EventFlow</title>
+    <link rel="stylesheet" href="admin_web.css">
+    <link rel="stylesheet" href="/EVENTMANAGEMENT/public/footer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <header class="top-nav">
+        <div class="logo">Event<span>Flow</span></div>
+        <div class="admin-actions">
+            <span class="admin-name"><i class='bx bxs-user-circle'></i> Admin Name</span>
+            <button class="logout-btn">Logout</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="page-intro">
+            <h1>Venue Management Portfolio</h1>
+            <p>Review, edit, and manage all registered event locations.</p>
+        </section>
+
+        <section class="admin-controls">
+            <div class="search-wrapper">
+                <i class='bx bx-search'></i>
+                <input type="text" id="venueSearch" placeholder="Search by venue name, location, or contact...">
+            </div>
+            
+            <div class="add-action-container">
+                <button class="add-venue-btn">
+                    <i class='bx bx-plus'></i> Add New Venue
+                </button>
+            </div>
+        </section>
+
+        <section class="venue-list">
+            
+            <div class="wide-card">
+                <div class="venue-img">
+                    <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&q=80" alt="Palace Image">
+                </div>
+                <div class="venue-details">
+                    <div class="detail-header">
+                        <h2>Royal Grand Palace</h2>
+                        <span class="charge-badge">$1,500 / Day</span>
+                    </div>
+                    <p class="description">A luxurious Victorian-style palace featuring marble flooring and crystal chandeliers, perfect for high-end weddings and corporate galas.</p>
+                    
+                    <div class="meta-grid">
+                        <div class="meta-item address-box">
+                            <i class='bx bx-map'></i>
+                            <span><strong>Address:</strong> 123 Heritage Lane, Civil Lines, Jaipur, Rajasthan</span>
+                        </div>
+
+                        <div class="meta-item">
+                            <i class='bx bx-area'></i>
+                            <span><strong>Size:</strong> 12,000 sq.ft</span>
+                        </div>
+                        
+                        <div class="meta-item">
+                            <i class='bx bx-phone'></i>
+                            <span>+91 98765 43210</span>
+                        </div>
+
+                        <div class="meta-item">
+                            <i class='bx bx-envelope'></i>
+                            <span>booking@royalgrand.com</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-actions">
+                        <button class="view-bookings-btn">
+                            <i class='bx bx-calendar-event'></i> View Bookings
+                        </button>
+                        <button class="edit-btn">Edit Details</button>
+                        <button class="delete-btn">Remove Venue</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Event Managers</h3>
+                <p>It is a professional administrative dashboard designed to centralize venue management, enabling real-time monitoring of event locations, capacities, and booking schedules through a clean, data-driven interface.</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li onclick="navigateTo('about')">About Us</li>
+                    <li onclick="navigateTo('events')">Upcoming Events</li>
+                    <li onclick="navigateTo('privacy')">Privacy Policy</li>
+                    <li onclick="navigateTo('terms')">Terms and Conditions</li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>Email: supportBCEevent@gmail.com</p>
+                <p>Phone: +91 9842xx41xx</p>
+                <p>Location: Aryabhatta Hostel, BCE Bhagalpur</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <span><a style="color: aquamarine;" href="#">Instagram</a></span>  |
+                    <span><a style="color: aquamarine;" href="#">Twitter</a></span>  |
+                    <span><a style="color: aquamarine;" href="#">LinkedIn</a></span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 EventFlow Management System. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="admin_web.js"></script>
+
+</body>
+</html>
