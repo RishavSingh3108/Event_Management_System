@@ -35,6 +35,7 @@ footer {
 }
 
 .footer-section ul li {
+    list-style: none;
     margin-bottom: 10px;
 }
 
@@ -64,4 +65,15 @@ footer {
     padding-top: 20px;
     font-size: 0.85rem;
     color: #94a3b8;
+}
+
+.foot-link {
+    text-decoration: none;
+    color: inherit; 
+    transition: 0.3s;
+}
+
+.foot-link:hover {
+    color: aquamarine; 
+    padding-left: 5px;
 }
