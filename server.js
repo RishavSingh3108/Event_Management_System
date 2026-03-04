@@ -1,16 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const cors = require('cors');
 const app = express();
 
+// 1. MIDDLEWARE (Must come before routes)
+app.use(cors());
 app.use(express.json());
 
-// 1. MONGODB CONNECTION
+// 2. MONGODB CONNECTION
 mongoose.connect('mongodb://127.0.0.1:27017/eventManagementDB')
     .then(() => console.log('Successfully connected to MongoDB'))
     .catch(err => console.error('MongoDB connection error:', err));
 
-// 2. USER SCHEMA
+// 3. USER SCHEMA
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     phone: String,
@@ -21,15 +24,9 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-// 3. STATIC FILES
-app.use(express.static(path.join(__dirname, 'public')));
+// --- 4. API ROUTES (Define these BEFORE static files) ---
 
-// 4. HOME ROUTE
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'Auth', 'auth.html'));
-});
-
-// 5. REGISTRATION
+// REGISTRATION
 app.post('/api/register', async (req, res) => {
     try {
         const { name, phone, email, password, role } = req.body;
@@ -44,22 +41,18 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
-// 6. LOGIN (Modified to send userName)
+// LOGIN
 app.post('/api/login', async (req, res) => {
     try {
         const { email, password, role } = req.body;
-
-        // Find user by email, password, AND role
-        const user = await User.findOne({ email, password, role });
+        const user = await User.findOne({ email: email.trim(), password, role });
 
         if (user) {
             const redirectPath = (role === 'Admin') ? '/admin/admin_web.html' : '/user/user_web.html';
-            
-            // We now send the name back to the frontend
             res.json({ 
                 success: true, 
                 redirect: redirectPath,
-                userName: user.name // <--- Added this line
+                userName: user.name 
             });
         } else {
             res.status(401).json({ 
@@ -72,7 +65,16 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-// Start the server
+
+// --- 5. STATIC FILES & PAGE ROUTES (Define after APIs) ---
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'Auth', 'auth.html'));
+});
+
+// 6. START SERVER
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
