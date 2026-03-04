@@ -21,7 +21,6 @@ function updateTitle() {
     submitBtn.innerText = isRegistering ? "GET STARTED" : "CONTINUE";
 }
 
-// --- NEW FUNCTIONAL BACKEND CONNECTION ---
 document.getElementById('authForm').onsubmit = async (e) => {
     e.preventDefault();
 
@@ -49,7 +48,10 @@ document.getElementById('authForm').onsubmit = async (e) => {
                 alert("Registration Successful! Please login.");
                 toggleAuth(); // Switch to login view
             } else {
-                // SUCCESS: Redirect to specific dashboard
+                // Save user info for the dashboard
+                localStorage.setItem('userName', result.userName);
+                localStorage.setItem('userRole', currentRole); 
+                
                 window.location.href = result.redirect;
             }
         } else {
@@ -57,5 +59,29 @@ document.getElementById('authForm').onsubmit = async (e) => {
         }
     } catch (err) {
         alert("Server Error. Make sure Node.js is running.");
+    }
+};
+
+// This looks for ?role=Admin in the URL and switches the tab automatically
+window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const roleHint = urlParams.get('role');
+
+    if (roleHint === 'Admin') {
+        setRole('Admin');
+    } else if (roleHint === 'User') {
+        setRole('User');
+    }
+});
+
+// To hide forgot password option during registration
+const originalToggle = toggleAuth;
+toggleAuth = function() {
+    originalToggle();
+    const forgotLink = document.getElementById('forgotPassWrapper');
+    if (isRegistering) {
+        forgotLink.style.display = 'none';
+    } else {
+        forgotLink.style.display = 'block';
     }
 };

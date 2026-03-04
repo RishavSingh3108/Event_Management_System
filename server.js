@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose'); // Added Mongoose
+const mongoose = require('mongoose');
 const path = require('path');
 const app = express();
 
@@ -10,7 +10,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/eventManagementDB')
     .then(() => console.log('Successfully connected to MongoDB'))
     .catch(err => console.error('MongoDB connection error:', err));
 
-// 2. USER SCHEMA (The blueprint for your data)
+// 2. USER SCHEMA
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     phone: String,
@@ -29,19 +29,14 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'Auth', 'auth.html'));
 });
 
-// 5. REGISTRATION (Updated for MongoDB)
+// 5. REGISTRATION
 app.post('/api/register', async (req, res) => {
     try {
         const { name, phone, email, password, role } = req.body;
-
-        // Create a new user instance
         const newUser = new User({ name, phone, email, password, role });
-        
-        // Save to MongoDB
         await newUser.save();
         res.json({ success: true, message: "Registration successful!" });
     } catch (error) {
-        // If email is a duplicate, MongoDB throws an error (code 11000)
         if (error.code === 11000) {
             return res.status(400).json({ success: false, message: "User already exists!" });
         }
@@ -49,17 +44,23 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
-// 6. LOGIN (Updated for MongoDB)
+// 6. LOGIN (Modified to send userName)
 app.post('/api/login', async (req, res) => {
     try {
         const { email, password, role } = req.body;
 
-        // Find user by email, password, AND role in MongoDB
+        // Find user by email, password, AND role
         const user = await User.findOne({ email, password, role });
 
         if (user) {
             const redirectPath = (role === 'Admin') ? '/admin/admin_web.html' : '/user/user_web.html';
-            res.json({ success: true, redirect: redirectPath });
+            
+            // We now send the name back to the frontend
+            res.json({ 
+                success: true, 
+                redirect: redirectPath,
+                userName: user.name // <--- Added this line
+            });
         } else {
             res.status(401).json({ 
                 success: false, 
